@@ -1,5 +1,5 @@
-# ERROR CORRECTION PROGRAMS =========================================================
-Artur Rego-Costa, January 2023
+# ERROR CORRECTION PROGRAMS
+*Artur Rego-Costa, January 2023*
 
 This folder contains two C++ programs to perform string error correction as usually
 necessary when dealing if barcode-amplicon sequencing. One program takes a barcode 
@@ -15,17 +15,17 @@ of either string is nA/nB > err_ratio (in which case B strings get converted to 
 nB/nA > err_ratio (the other way around). The programs do this efficiently by using a
 trie-based algorithm. More can be read on (1).
 
-Both programs take as an input a *headerless tab-separated table*, where one of the columns
-need to be error-corrected. Which column that is is passed as an argument.
+Both programs take as an input a **headerless** tab-separated table, where one of the columns
+needs to be error-corrected.
 
 ## Dependencies
 error_correct_from_dict uses the robin_map class, which is a header-only library maintained
-in github.com/Tessil/robin-map. For ease of use, I include it in /dependencies/tsl. It would
+in [github.com/Tessil/robin-map](https://github.com/Tessil/robin-map). For ease of use, I include it in /dependencies/tsl. It would
 be common to copy the /dependencies/tsl directory into a local ~/local/include directory.
 If you do otherwise, edit the compilation line appropriately.
 
 For Harvad Odyssey cluster users, gcc can be loaded using command:
-    module load gcc/8.2.0-fasrc01
+	module load gcc/8.2.0-fasrc01
 
 ## error_correct_from_dict.cpp
 Error correct based on a dictionary of known barcodes. This program does not have an
@@ -33,21 +33,21 @@ err_ratio criterion: it'll simply correct any string that is similar enough (d <
 to a string in the dictionary, and discard any string for which d > err.
 
 ### Compilation
-    g++ error_correct_from_dict.cpp -o error_correct_from_dict -O3 -std=c++0x -I$HOME/local/include -lpthread -fopenmp -D_GLIBCXX_PARALLEL
+	g++ error_correct_from_dict.cpp -o error_correct_from_dict -O3 -std=c++0x -I$HOME/local/include -lpthread -fopenmp -D_GLIBCXX_PARALLEL
 
 ### Usage
-    error_correct_from_dict [-cpu i] [-err i] -bc m -dict dict_file input_file > output_file
-    cat input_file | error_correct_from_dict [-cpu i] [-err i] -bc -dict dict_file > output_file
+	error_correct_from_dict [-cpu i] [-err i] -bc m -dict dict_file input_file > output_file
+	cat input_file | error_correct_from_dict [-cpu i] [-err i] -bc -dict dict_file > output_file
 
 ### Arguments
-    -cpu i				integer number of CPUs per node available for parallelization [default: 1]
-    -err i 				integer Levenshtein distance criterion for error correction.
-    					i.e. two strings get corrected if their Levenshtein distance d <= err.
-    					[default: 2]
-    -bc m				integer column which to error correct (1-indexed, meaning that m == 1 
-    					for the first column)
-    -dict dict_file		dict_file is a single column file with a list of reference barcodes.
-    input file 			headerless tab-separated input table
+	-cpu i				integer number of CPUs per node available for parallelization [default: 1]
+	-err i 				integer Levenshtein distance criterion for error correction.
+						i.e. two strings get corrected if their Levenshtein distance d <= err.
+						[default: 2]
+	-bc m				integer column which to error correct (1-indexed, meaning that m == 1 
+						for the first column)
+	-dict dict_file		dict_file is a single column file with a list of reference barcodes.
+	input file			headerless tab-separated input table
 
 ### Output
 A headerless tab-separated table of the same format as the input, but where the m-th column
@@ -65,26 +65,26 @@ seen less than a number min_count of times, and that cannot be corrected into an
 higher-count string.
 
 ### Compilation
-    g++ fb_trie_rethread_5.cpp -o fb_trie_rethread_5 -O3 -std=c++0x -lpthread -fopenmp -D_GLIBCXX_PARALLEL
+	g++ fb_trie_rethread_5.cpp -o fb_trie_rethread_5 -O3 -std=c++0x -lpthread -fopenmp -D_GLIBCXX_PARALLEL
 
 ### Usage
-    fb_trie_rethread_5 [-cpu i] [-err i] [-err_ratio i] [-min_count i] -pop n -bc m file > output_file
-    cat file | fb_trie_rethread_5 [-cpu i] [-err i] [-err_ratio i] [-min_count i] -pop n -bc m > output_file
+	fb_trie_rethread_5 [-cpu i] [-err i] [-err_ratio i] [-min_count i] -pop n -bc m file > output_file
+	cat file | fb_trie_rethread_5 [-cpu i] [-err i] [-err_ratio i] [-min_count i] -pop n -bc m > output_file
 
 #### Arguments
-    -cpu i				number of CPUs per node available for parallelization
-    -err i 				Levenshtein distance criterion for error correction.
-    					i.e. two strings get corrected if their Levenshtein distance d <= err.
-    					[default: 2]
-    -err_ratio i 		float ratio nA/nB of number of times strings A and B are seen such that
-    					(i) if nA/nB > err_ratio, then B gets corrected to A, or (ii) nB/nA, then
-    					A gets corrected into B. [default: 32]
-    -min_count i		integer minimum number of at and below which a string will be dicarded,
-    					unless it can be corrected into another higher-count string seen in the 
-    					data. [default: 10]
-    -bc m				column which to error correct (1-indexed, meaning that m == 1 for the
-    					first column)
-    input file 			headerless tab-separated input table
+	-cpu i				number of CPUs per node available for parallelization
+	-err i 				Levenshtein distance criterion for error correction.
+						i.e. two strings get corrected if their Levenshtein distance d <= err.
+						[default: 2]
+	-err_ratio i		float ratio nA/nB of number of times strings A and B are seen such that
+						(i) if nA/nB > err_ratio, then B gets corrected to A, or (ii) nB/nA, then
+						A gets corrected into B. [default: 32]
+	-min_count i		integer minimum number of at and below which a string will be dicarded,
+						unless it can be corrected into another higher-count string seen in the 
+						data. [default: 10]
+	-bc m				column which to error correct (1-indexed, meaning that m == 1 for the
+						first column)
+	input file			headerless tab-separated input table
 
 ### Output
 A headerless tab-separated table of the same format as the input, but where the m-th column
