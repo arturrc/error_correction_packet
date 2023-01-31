@@ -1,7 +1,7 @@
-# ERROR CORRECTION PROGRAMS
+# BARCODE ERROR CORRECTION PROGRAMS
 *Artur Rego-Costa, January 2023*
 
-This folder contains two C++ programs to perform string error correction as usually
+This repo contains two C++ programs to perform string error correction as usually
 necessary when dealing if barcode-amplicon sequencing. One program takes a barcode 
 reference list, while the other does not. Programs were written by Alex Nguyen Ba 
 and José Rojas Echenique and should be cited as indicated below. 
