@@ -2,7 +2,7 @@
 *Artur Rego-Costa, January 2023*
 
 This repo contains two C++ programs to perform string error correction as usually
-necessary when dealing if barcode-amplicon sequencing. One program takes a barcode 
+necessary when dealing with barcode-amplicon sequencing. One program takes a barcode 
 reference list, while the other does not. Programs were written by Alex Nguyen Ba 
 and José Rojas Echenique and should be cited as indicated below. 
 
@@ -20,8 +20,8 @@ needs to be error-corrected.
 
 ## Dependencies
 error_correct_from_dict uses the robin_map class, which is a header-only library maintained
-in [github.com/Tessil/robin-map](https://github.com/Tessil/robin-map). For ease of use, I include it in /dependencies/tsl. It would
-be common to copy the /dependencies/tsl directory into a local ~/local/include directory.
+in [github.com/Tessil/robin-map](https://github.com/Tessil/robin-map). For ease of use, I include it in /include/tsl. It would
+be common to copy the /include/tsl directory into a local ~/local/include directory.
 If you do otherwise, edit the compilation line appropriately.
 
 For Harvad Odyssey cluster users, gcc can be loaded using command:
