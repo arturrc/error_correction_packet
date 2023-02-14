@@ -343,14 +343,17 @@ void correct(int pop,int start_c, int stop_c, std::unordered_map<int,vector<stri
 				string output;
 				output.reserve(reads[pop][bc][i].length()+16);
 
-				output.append(fields[0].begin(),fields[0].end() - fields[0].begin());
+				int j=0;
+				if(j == bc_id){
+					output.append(m);
+				}else{
+					output.append(fields[j].begin(),fields[j].end() - fields[j].begin());
+				}
 				for(unsigned int j = 1;j < fields.size();++j){
 					if(j == bc_id){
 						output.append("	").append(m);
-					}
-					else{
+					}else{
 						output.append("	").append(fields[j].begin(),fields[j].end() - fields[j].begin());
-
 					}
 				}
 				output.append("\n");
@@ -400,14 +403,17 @@ void correct_OMP(int pop,int start_c, int stop_c, std::unordered_map<int,vector<
 				string output;
 				output.reserve(reads[pop][bc][i].length()+16);
 
-				output.append(fields[0].begin(),fields[0].end() - fields[0].begin());
+				int j=0;
+				if(j == bc_id){
+					output.append(m);
+				}else{
+					output.append(fields[j].begin(),fields[j].end() - fields[j].begin());
+				}
 				for(unsigned int j = 1;j < fields.size();++j){
 					if(j == bc_id){
 						output.append("	").append(m);
-					}
-					else{
+					}else{
 						output.append("	").append(fields[j].begin(),fields[j].end() - fields[j].begin());
-
 					}
 				}
 				output.append("\n");
