@@ -725,12 +725,16 @@ int main(int argc, char * argv[]) {
 			string output;
 			output.reserve(read.length()+16);
 
-			output.append(fields[0].begin(),fields[0].end() - fields[0].begin());
+			int j=0;
+			if(j == bc_id){
+				output.append(correction_map[pop][bc]);
+			}else{
+				output.append(fields[j].begin(),fields[j].end() - fields[j].begin());
+			}
 			for(unsigned int j = 1;j < size;++j){
 				if(j == bc_id){
 					output.append("	").append(correction_map[pop][bc]);
-				}
-				else{
+				}else{
 					output.append("	").append(fields[j].begin(),fields[j].end() - fields[j].begin());
 				}
 			}

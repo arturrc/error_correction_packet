@@ -633,17 +633,13 @@ int main(int argc, char * argv[]) {
 			string output;
 			output.reserve(read.length()+16);
 
-			for(unsigned int j = 0;j < fields.size();++j){
-				if(j == 0){
-					if(j == bc_id){
-						output.append(correction_match_dictionnary[bc]);
-
-					}
-					else{
-						output.append(fields[j].begin(),fields[j].end() - fields[j].begin());
-
-					}
-				}
+			int j=0;
+			if(j == bc_id){
+				output.append(correction_match_dictionnary[bc]);
+			}else{
+				output.append(fields[j].begin(),fields[j].end() - fields[j].begin());
+			}
+			for(unsigned int j = 1;j < fields.size();++j){
 				else{
 					if(j == bc_id){
 						output.append("	").append(correction_match_dictionnary[bc]);
